@@ -1,73 +1,99 @@
 # Trying On｜试装（正在进行时）
 
-Trying On 是一个 Windows 桌面版服装电商出图工具，面向淘宝、天猫、京东、拼多多、抖音、小红书等平台的商品图生成流程。
+Trying On 是一个 Windows 桌面版服装电商出图工具，面向服装商家、电商运营、图片制作人员和需要快速做商品图的店主。
 
-它的目标是让服装商家用尽量简单的方式完成出图：上传商品图，选择平台和模板，确认生成，然后检查并下载成品。
+它把服装出图流程压成四步：上传商品图，选择模板，确认生成，检查并下载成品。你不需要自己搭建服务器，也不需要改代码，只要在软件里填写可用的 `Base URL`、`API Key` 和模型名称，就可以调用兼容的图片生成接口完成出图。
 
-## 推荐下载：解压后直接运行
+## 推荐下载
 
-如果你想下载后直接双击 exe，请下载 Release 包：
+普通用户请下载 Release 发布包，而不是右上角绿色 `Code -> Download ZIP`：
 
-<https://github.com/kira987654321/trying-on/releases/download/v0.1.0/trying-on-0.1.0-win-x64.zip>
+**下载地址：** <https://github.com/kira987654321/trying-on/releases/tag/v0.1.0>
 
-下载后：
+下载后这样运行：
 
-1. 解压 `trying-on-0.1.0-win-x64.zip`
-2. 进入 `时装ing-win-x64`
-3. 双击运行 `时装ing.exe`
+1. 下载 `trying-on-0.1.0-win-x64.zip`
+2. 解压 zip
+3. 进入 `时装ing-win-x64`
+4. 双击 `时装ing.exe`
+5. 打开软件右上角 `设置`
+6. 填写 `Base URL`、`API Key` 和模型名称
+7. 上传商品图，选择模板，开始生成
 
-这是最简单的使用方式，不需要恢复脚本。
+Release 包解压后可以直接双击 `时装ing.exe` 运行，不需要恢复脚本。
 
-## 为什么 Code -> Download ZIP 不能直接双击 exe？
+## 实机演示
 
-GitHub 右上角绿色 `Code` 里的 `Download ZIP` 下载的是“仓库源码压缩包”，不是专门的软件安装包。
+### 1. 上传商品图
 
-这个源码压缩包有一个限制：GitHub 普通仓库不适合直接存放超过 100MB 的单个文件，而本项目的启动程序 `时装ing.exe` 大约 210MB。
+第一步只需要把服装商品图放进来。商品图是生成的核心素材，其他细节图、Logo 或辅料可以按需要补充。
 
-所以仓库里的 `Code -> Download ZIP` 版本采用了分包方式：
+![上传商品图](docs/images/01-upload-product.png)
 
-- `exe-parts/TryingOn.exe.part001`
-- `exe-parts/TryingOn.exe.part002`
-- `exe-parts/TryingOn.exe.part003`
-- `restore-exe.bat`
+### 2. 选择模板
 
-`restore-exe.bat` 不是另一个软件，它只是一个恢复脚本，用来把三个分包重新合成真正的启动程序 `TryingOn.exe`。
+第二步选择适合当前平台和用途的模板。模板负责控制图片的大方向，例如商品主图、内容封面、活动图、详情页卖点图等。
 
-## 如果你一定要点 Code -> Download ZIP
+![选择模板](docs/images/02-select-template.png)
 
-也可以使用红圈里的 `Code -> Download ZIP`，但下载后要多一步：
+### 3. 确认生成
 
-1. 点击绿色 `Code`
-2. 点击 `Download ZIP`
-3. 解压下载到的仓库 ZIP
-4. 进入 `时装ing-win-x64`
-5. 双击 `restore-exe.bat`
-6. 等它生成 `TryingOn.exe`
-7. 双击 `TryingOn.exe` 运行
+第三步检查本次要生成多少张图、使用哪些模板、素材是否足够。确认无误后点击开始生成。
 
-恢复脚本已经本地验证过，生成的 `TryingOn.exe` 和原始 `时装ing.exe` 文件内容一致。
+![确认生成](docs/images/03-confirm-generation.png)
+
+### 4. 检查结果并下载
+
+第四步查看生成结果，按衣服是否变形、颜色是否一致、Logo 是否保留、文字是否可读等检查项快速审核，然后下载或批量导出。
+
+![结果质检和下载](docs/images/04-results-quality.png)
+
+### 5. 预览成品
+
+生成后的图片可以单张预览，也可以保存到本地，方便继续用于店铺上架、活动页面或内容发布。
+
+![成品预览和下载](docs/images/05-preview-download.png)
 
 ## 主要能力
 
-- 支持服装商品图上传和素材复用
-- 支持多平台模板方向
-- 支持男装、女装模板体系
-- 支持批量生成任务
-- 支持本地结果历史
-- 支持单张下载和批量导出
-- 支持 Windows 桌面端运行
+- 服装商品图上传和素材复用
+- 多平台电商模板方向
+- 男装、女装模板体系
+- 多模板批量生成
+- 本地生成历史
+- 结果质检提示
+- 单张下载和批量导出
+- Windows 桌面端运行
 
-## 文件说明
+## API 和 Base URL 配置
 
-- `时装ing-win-x64/`：Windows x64 桌面版程序文件夹
-- `时装ing-win-x64/restore-exe.bat`：仅用于 `Code -> Download ZIP` 方式下载后的 exe 恢复
-- `时装ing-win-x64/exe-parts/`：启动程序分包
-- `时装ing-win-x64/TryingOn.exe`：运行恢复脚本后生成的启动程序
+Trying On 使用 OpenAI-compatible image generation API。项目不在 GitHub 上写死任何固定服务商地址，也不会保存或公开你的密钥。
 
-## 推荐给用户的下载方式
+首次使用时，在软件右上角打开 `设置`，填写下面三项：
 
-普通用户建议始终下载 Release 包：
+- `Base URL`：你的图片生成接口地址
+- `API Key`：你的接口密钥
+- 模型名称：你的服务商提供的图片生成模型名称
 
-<https://github.com/kira987654321/trying-on/releases/tag/v0.1.0>
+填写后保存配置，再回到主流程上传商品图并生成。只要你的服务商接口兼容 OpenAI 风格的图片生成调用，软件就可以按配置发起请求。
 
-这样可以解压后直接运行，不需要理解 GitHub 仓库源码 ZIP 的限制。
+请不要把自己的 `API Key` 上传到 GitHub，也不要写进公开文档。
+
+## 为什么不把程序文件夹直接放进仓库？
+
+GitHub 右上角绿色 `Code -> Download ZIP` 下载的是仓库源码压缩包，不是正式的软件安装包。普通仓库不适合存放大型桌面程序文件，尤其本项目的 `时装ing.exe` 单文件约 210MB，超过 GitHub 普通仓库的单文件限制。
+
+所以本仓库首页只保留产品说明和演示截图，真正可运行的软件放在 Release：
+
+- 仓库首页：产品简介、实机截图、使用说明
+- Release：正式 Windows x64 下载包
+- 用户使用：下载 Release zip，解压后双击 `时装ing.exe`
+
+这样下载入口更清楚，也避免用户拿到源码包后看到分包文件或恢复脚本。
+
+## 当前版本
+
+- 版本：`v0.1.0`
+- 系统：Windows x64
+- 下载：<https://github.com/kira987654321/trying-on/releases/tag/v0.1.0>
+
